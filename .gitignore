@@ -6,3 +6,6 @@ _site/
 _freeze/
 /.quarto/
 *.key
+.DS_Store
+.local
+.config/
