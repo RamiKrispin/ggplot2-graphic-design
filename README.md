@@ -121,6 +121,49 @@ We will make use of custom fonts. If you want to follow all contents, make sure 
 
 Cédric Scherer is a graduated computational ecologist with a passion for design. After his PhD, he combined his expertise in analyzing and visualizing large data sets in R with his passion to become an independent data visualization designer and specialist. Cédric has created visualizations across all disciplines, purposes, and styles and regularly teaches data visualization principles, the R programing language, and ggplot2. Due to regular participation in social data challenges such as #TidyTuesday, he is now well known for complex and visually appealing figures, entirely made with ggplot2, that look as if they have been created with a vector design tool.
 
+## Running the workshop with Docker
+
+General requirements for running the workshop materials with Docker:
+- Docker desktop or equivalent
+- Clone this repository or the orignal workshop repository and copy the `docker-compose.yml` file to your local machine to launch the Docker container
+- Set the following three environment variables:
+    - `GGPLOT2_WORKSHOP_IMAGE` - The project's image name (currently set as `rkrispin/ggplot2_workshop:dev.0.0.0.9000`)
+    - `GGPLOT2_WORKING_WORKING_DIR` - The path on your local machine for the workshop folder. The `docker-compose` will mount the folder to the container enable you to sync the changes with your local folder
+    - `RSTUDIO_CONFIG_PATH` - The path for your RStudio config files to load your setting (color theme, code snippet, etc) with the RStudio server inside the container
+- Have port 8787 available
+
+### Setting environment variables
+
+To launch the docker container with `docker-compose` command, you will have to set the following variables into your `bash` script (or manually set the variables from your terminal):
+
+``` shell
+export GGPLOT2_WORKING_WORKING_DIR=YOUR_LOCAL_PATH/ggplot2-graphic-design
+export GGPLOT2_WORKSHOP_IMAGE=rkrispin/ggplot2_workshop:dev.0.0.0.9000
+export RSTUDIO_CONFIG_PATH=$HOME/.config/rstudio
+```
+
+**Note:** On the above setting change: 
+- For the `GGPLOT2_WORKING_WORKING_DIR` variable change `YOUR_LOCAL_PATH` with your local path for the ggplot2-graphic-design folder (or any other name you used to store the workshop materials)
+- For the `RSTUDIO_CONFIG_PATH` variable the `$HOME` is the default root setting, please change or modify according to your local machine setting (on Mac and Linux should be, by default, the root folder setting) 
+
+
+Once set, use the `docker-compose` command to luanch the Docker container:
+``` shell
+docker-compose up -d
+```
+
+You should expect the following output:
+
+``` shell
+[+] Running 2/2
+ ⠿ Network ggplot2_workshop_default      Created                                                  0.1s
+ ⠿ Container ggplot2_workshop-rstudio-1  Started
+```
+
+Next, on your browser open [http://localhost:8787/](http://localhost:8787/).
+
+
+
 ------------------------------------------------------------------------
 
 ![](https://i.creativecommons.org/l/by/4.0/88x31.png) This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
